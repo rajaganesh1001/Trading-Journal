@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"/>
+<title>Aureum Journal — Options Trading Journal</title>
+<meta name="description" content="A clean, modern trading journal for Nifty50, BankNifty and Sensex options traders."/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23ff6b5b'/%3E%3C/svg%3E">
+<style>
+/*__CSS__*/
+</style>
+</head>
+<body>
+
+<!-- ============================================================ LANDING PAGE
+     Clean, spacious editorial layout — flat cards, soft shadows, rounded
+     corners throughout, zero 3D. "Enter the Journal" switches to the
+     app-shell workspace below. -->
+<div id="landingPage">
+  <nav class="landing-nav">
+    <div class="brand">
+      <img id="landingBrandImg" alt="Aureum Journal"/>
+      <div>
+        <div class="brand-title">Aureum Journal</div>
+        <small>OPTIONS TRADING JOURNAL</small>
+      </div>
+    </div>
+    <div class="landing-nav-links">
+      <a href="#landingFeatures" class="lnl-item">Features</a>
+      <a href="#landingShowcase" class="lnl-item">How it works</a>
+      <a href="#landingStats" class="lnl-item">Why Aureum</a>
+      <button class="btn btn-primary btn-sm" id="landingEnterBtn">Enter the Journal</button>
+    </div>
+  </nav>
+
+  <section class="landing-hero">
+    <div class="landing-hero-content">
+      <div class="landing-eyebrow" data-icon-inline="sparkle">
+        <span data-icon="sparkle" style="display:inline-flex;width:14px;height:14px;"></span>
+        Trading Journal for Nifty50 · BankNifty · Sensex
+      </div>
+      <h1>Trade with clarity.<br/>Review with <span class="accent">confidence.</span></h1>
+      <p>Aureum Journal turns your options trading history into a clean, organized workspace — log every trade, uncover your best strategies, track expiries, and calculate strike pairs, all in one friendly dashboard.</p>
+      <div class="landing-hero-actions">
+        <button class="btn btn-primary btn-lg" id="landingEnterBtn2">Enter the Journal</button>
+        <button class="btn btn-ghost btn-lg" id="landingSeeFeaturesBtn">See Features</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing-section" id="landingFeatures">
+    <div class="landing-section-head">
+      <div class="ls-kicker">Five Rooms, One Journal</div>
+      <h2>Everything a serious options trader needs</h2>
+      <p>Each workspace is a purpose-built area of your journal — navigate between them from the sidebar once you're inside.</p>
+    </div>
+    <div class="landing-feature-grid">
+      <div class="glass-panel landing-feature-card hover-tilt">
+        <div class="lf-icon" data-icon="dashboard"></div>
+        <h3>Command Deck</h3>
+        <p>A live per-index performance overview of your Nifty50, BankNifty &amp; Sensex trading — equity curve, KPIs and upcoming reminders at a glance.</p>
+      </div>
+      <div class="glass-panel landing-feature-card hover-tilt">
+        <div class="lf-icon" data-icon="vault"></div>
+        <h3>Trade Vault</h3>
+        <p>Log, edit, duplicate and manage every options trade with full audit history and instant P&amp;L calculation.</p>
+      </div>
+      <div class="glass-panel landing-feature-card hover-tilt">
+        <div class="lf-icon" data-icon="analytics"></div>
+        <h3>Analytics Chamber</h3>
+        <p>Identify your most effective strategies across time, index and tag with clean, readable charts.</p>
+      </div>
+      <div class="glass-panel landing-feature-card hover-tilt">
+        <div class="lf-icon" data-icon="reminders"></div>
+        <h3>Reminder Tower</h3>
+        <p>Never miss an expiry, policy event or personal review checkpoint — an organized timeline of what's coming next.</p>
+      </div>
+      <div class="glass-panel landing-feature-card hover-tilt">
+        <div class="lf-icon" data-icon="ladder"></div>
+        <h3>Strike Finder</h3>
+        <p>A rule-based Nifty option strike-pair calculator from your 3 manual morning inputs — no live pricing, no broker API.</p>
+      </div>
+      <div class="glass-panel landing-feature-card hover-tilt">
+        <div class="lf-icon" data-icon="shield"></div>
+        <h3>Private &amp; Local</h3>
+        <p>Every trade and reminder is stored locally in your browser. Export or import a full backup anytime, on your terms.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing-section" id="landingShowcase">
+    <div class="landing-showcase">
+      <div class="glass-panel landing-showcase-visual">
+        <div style="padding:36px 30px;">
+          <div class="index-perf-grid" style="grid-template-columns:1fr;">
+            <div class="glass-panel index-perf-card" style="box-shadow:none;border-color:var(--card-border);">
+              <div class="ipc-top">
+                <span class="idx-chip NIFTY50"><span class="dot"></span>NIFTY</span>
+                <span class="ipc-trend pos" data-icon="trendUp"> 62% win</span>
+              </div>
+              <div class="ipc-value pos">+₹18,240</div>
+              <div class="ipc-sub">24 closed trades · 2 open</div>
+              <canvas class="ipc-spark" id="landingShowcaseSpark"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="landing-showcase-text">
+        <div class="ls-kicker">How It Works</div>
+        <h2>Your data, organized — not just a spreadsheet.</h2>
+        <p>Instead of scrolling raw spreadsheets, Aureum Journal represents your trading activity as clean, readable cards and charts: real sparklines for index performance, bar charts for strategy analytics, and an organized timeline for your reminders.</p>
+        <ul class="landing-checklist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Every chart and card is generated live from your real trade data</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Light and Dark mode, switch anytime — your choice is remembered</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Fast, accessible, and fully usable offline</li>
+        </ul>
+        <button class="btn btn-primary" id="landingEnterBtn3">Explore the Workspace</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing-section" id="landingStats">
+    <div class="landing-section-head">
+      <div class="ls-kicker">Why Aureum</div>
+      <h2>Built specifically for Indian index options traders</h2>
+    </div>
+    <div class="landing-stats">
+      <div class="glass-panel landing-stat"><div class="ls-num">3</div><div class="ls-label">Indices Covered</div></div>
+      <div class="glass-panel landing-stat"><div class="ls-num">5</div><div class="ls-label">Dedicated Rooms</div></div>
+      <div class="glass-panel landing-stat"><div class="ls-num">100%</div><div class="ls-label">Local &amp; Private</div></div>
+      <div class="glass-panel landing-stat"><div class="ls-num">0</div><div class="ls-label">Broker API Calls</div></div>
+    </div>
+  </section>
+
+  <section class="landing-cta glass-panel">
+    <h2>Your trading history deserves better than a spreadsheet.</h2>
+    <p>Step into the journal — your trade history is already loaded and ready to explore.</p>
+    <button class="btn btn-primary btn-lg" id="landingEnterBtn4">Enter the Journal</button>
+  </section>
+
+  <footer class="landing-footer">
+    Aureum Journal — Conceptual trading journal build. Data is stored locally in your browser ([DATABASE_TECHNOLOGY] placeholder).
+  </footer>
+</div>
+
+<!-- ============================================================ APP SHELL -->
+<div class="app-shell hidden" id="appShell">
+  <!-- ============ SIDEBAR (collapsible feature navigation) ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <img class="brand-mark-img" id="brandMarkImg" alt="Aureum Journal" />
+      <div class="brand-text">
+        <div class="brand-title">Aureum Journal</div>
+        <small>OPTIONS TRADING</small>
+      </div>
+      <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" title="Collapse sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6l-6 6 6 6"/></svg>
+      </button>
+    </div>
+
+    <div class="sidebar-nav" id="navTabs">
+      <div class="sidebar-section-label">Workspace</div>
+    </div>
+
+    <div class="sidebar-foot">
+      <div class="theme-toggle" id="themeToggle" title="Toggle Light / Dark mode">
+        <span class="tt-track"></span><span class="tt-label">Dark Mode</span>
+      </div>
+      <div class="sidebar-util-row">
+        <button class="icon-btn" id="exportBtn" title="Export full backup (JSON)">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="#ff6b5b" stroke-width="1.8"/><path d="M7 10l5 5 5-5M12 15V3" stroke="#14b8a6" stroke-width="1.8"/></svg>
+        </button>
+        <label class="icon-btn" title="Import backup (JSON)" style="cursor:pointer;">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="#ff6b5b" stroke-width="1.8"/><path d="M17 8l-5-5-5 5M12 3v12" stroke="#14b8a6" stroke-width="1.8"/></svg>
+          <input type="file" id="importInput" accept="application/json" style="display:none;"/>
+        </label>
+        <button class="icon-btn" id="resetBtn" title="Reset to originally-imported trade history">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8" stroke="#14b8a6" stroke-width="1.8"/><path d="M3 3v5h5" stroke="#ff6b5b" stroke-width="1.8"/></svg>
+        </button>
+        <button class="icon-btn" id="backToLandingBtn" title="Back to landing page">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="#14b8a6" stroke-width="1.8"/><path d="M9 22V12h6v10" stroke="#ff6b5b" stroke-width="1.8"/></svg>
+        </button>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <!-- ============ MAIN AREA ============ -->
+  <div class="main-area">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" title="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+        <div class="topbar-title" id="topbarTitle">Command Deck</div>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" id="reminderNavBtn" title="Reminders">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="#14b8a6" stroke-width="1.8"/><path d="M13.7 21a2 2 0 01-3.4 0" stroke="#ff6b5b" stroke-width="1.8"/></svg>
+          <span class="badge-dot" id="reminderBadge"></span>
+        </button>
+      </div>
+    </header>
+
+
+    <div class="view-scroll">
+      <!-- ============ DASHBOARD VIEW ============ -->
+      <main>
+        <section class="view active" id="view-dashboard">
+          <div class="view-header">
+            <div>
+              <h1>Command Deck</h1>
+              <div class="subtitle">A live summary of your Nifty50, BankNifty &amp; Sensex performance.</div>
+            </div>
+            <div class="view-header-actions">
+              <button class="btn btn-ghost" id="goAnalyticsBtn">View Analytics</button>
+              <button class="btn btn-primary" id="newTradeBtnDash">+ New Trade</button>
+            </div>
+          </div>
+
+          <div class="book-tabs" id="dashBookTabs">
+            <button class="book-tab" data-book="Live">
+              <span class="book-tab-icon" data-icon="vault"></span>
+              <span>Live Trades</span>
+              <span class="book-tab-count" id="dashBookCountLive"></span>
+            </button>
+            <button class="book-tab" data-book="Strategy">
+              <span class="book-tab-icon" data-icon="calc"></span>
+              <span>Strategy Testing</span>
+              <span class="book-tab-count" id="dashBookCountStrategy"></span>
+            </button>
+          </div>
+
+          <div class="grid-4" id="kpiRow" style="margin-bottom:20px;"></div>
+
+          <div class="index-perf-grid" id="indexPerfCards" style="margin-bottom:20px;"></div>
+
+          <div class="grid-2">
+            <div class="glass-panel hover-tilt">
+              <div class="panel-title"><h3><span class="panel-icon" data-icon="analytics"></span>Equity Curve</h3></div>
+              <div class="panel-body"><canvas class="flat-chart tall" id="dashEquityCanvas"></canvas></div>
+            </div>
+            <div class="glass-panel hover-tilt">
+              <div class="panel-title"><h3><span class="panel-icon" data-icon="bell"></span>Upcoming Reminders</h3><span class="link-btn" data-nav="reminders">View Tower →</span></div>
+              <div class="panel-body" id="upcomingReminderList"></div>
+            </div>
+          </div>
+
+          <div class="glass-panel" style="margin-top:20px;">
+            <div class="panel-title"><h3><span class="panel-icon" data-icon="vault"></span>Recent Trades</h3><span class="link-btn" data-nav="vault">Open Vault →</span></div>
+            <div class="panel-body row-list" id="recentTradesList"></div>
+          </div>
+        </section>
+
+        <!-- ============ TRADE VAULT VIEW ============ -->
+        <section class="view" id="view-vault">
+          <div class="view-header">
+            <div>
+              <h1>Trade Vault</h1>
+              <div class="subtitle">Log, edit, duplicate and manage every options trade with full audit history.</div>
+            </div>
+            <div class="view-header-actions">
+              <button class="btn btn-primary" id="newTradeBtnVault">+ New Trade</button>
+            </div>
+          </div>
+
+          <div class="book-tabs" id="vaultBookTabs">
+            <button class="book-tab" data-book="Live">
+              <span class="book-tab-icon" data-icon="vault"></span>
+              <span>Live Trades</span>
+              <span class="book-tab-count" id="vaultBookCountLive"></span>
+            </button>
+            <button class="book-tab" data-book="Strategy">
+              <span class="book-tab-icon" data-icon="calc"></span>
+              <span>Strategy Testing</span>
+              <span class="book-tab-count" id="vaultBookCountStrategy"></span>
+            </button>
+          </div>
+
+          <div class="glass-panel" style="padding:18px;">
+            <div class="toolbar" id="vaultToolbar"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <span id="vaultCount" style="font-size:12px;color:var(--text-3);"></span>
+            </div>
+            <div class="table-wrap" id="vaultTableWrap"></div>
+          </div>
+        </section>
+
+        <!-- ============ ANALYTICS VIEW ============ -->
+        <section class="view" id="view-analytics">
+          <div class="view-header">
+            <div>
+              <h1>Analytics Chamber</h1>
+              <div class="subtitle">Identify your most effective strategies across time, index and tag.</div>
+            </div>
+          </div>
+
+          <div class="book-tabs" id="analyticsBookTabs">
+            <button class="book-tab" data-book="Live">
+              <span class="book-tab-icon" data-icon="vault"></span>
+              <span>Live Trades</span>
+              <span class="book-tab-count" id="analyticsBookCountLive"></span>
+            </button>
+            <button class="book-tab" data-book="Strategy">
+              <span class="book-tab-icon" data-icon="calc"></span>
+              <span>Strategy Testing</span>
+              <span class="book-tab-count" id="analyticsBookCountStrategy"></span>
+            </button>
+          </div>
+
+          <div class="glass-panel" style="padding:16px 18px;margin-bottom:18px;">
+            <div class="filters-bar" id="analyticsFilters"></div>
+          </div>
+
+          <div class="grid-4" id="analyticsKpis" style="margin-bottom:20px;"></div>
+
+          <div class="two-col section-block">
+            <div class="glass-panel chart-card">
+              <div class="chart-head"><h3 style="margin:0;">P&amp;L by Period</h3></div>
+              <canvas class="flat-chart" id="periodBarCanvas"></canvas>
+            </div>
+            <div class="glass-panel chart-card">
+              <div class="chart-head"><h3 style="margin:0;">Equity Curve (Filtered)</h3></div>
+              <canvas class="flat-chart" id="analyticsEquityCanvas"></canvas>
+            </div>
+          </div>
+
+          <div class="two-col section-block">
+            <div class="glass-panel">
+              <div class="panel-title"><h3><span class="panel-icon" data-icon="gauge"></span>Strategy Leaderboard</h3></div>
+              <div class="panel-body" id="strategyLeaderboard"></div>
+            </div>
+            <div class="glass-panel">
+              <div class="panel-title"><h3><span class="panel-icon" data-icon="layers"></span>Index Comparison</h3></div>
+              <div class="panel-body" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+                <canvas id="indexDonut" width="150" height="150" style="width:150px;height:150px;"></canvas>
+                <div class="legend-row" id="indexLegend" style="flex-direction:column;gap:8px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-panel" style="margin-bottom:22px;">
+            <div class="panel-title"><h3><span class="panel-icon" data-icon="book"></span><span id="dailyTradeLogTitle">Daily Trade Log</span></h3><span class="link-btn" id="analyticsDailyExport">Export CSV →</span></div>
+            <div class="panel-body" id="dailyTradeLog"></div>
+          </div>
+
+          <div class="glass-panel">
+            <div class="panel-title"><h3><span class="panel-icon" data-icon="target"></span>Performance by Tag</h3></div>
+            <div class="panel-body row-list" id="tagBreakdown"></div>
+          </div>
+        </section>
+
+        <!-- ============ REMINDERS VIEW ============ -->
+        <section class="view" id="view-reminders">
+          <div class="view-header">
+            <div>
+              <h1>Reminder Tower</h1>
+              <div class="subtitle">Never miss an expiry, policy event or personal review checkpoint.</div>
+            </div>
+            <div class="view-header-actions">
+              <button class="btn btn-primary" id="newReminderBtn">+ Add Reminder</button>
+            </div>
+          </div>
+
+          <div class="glass-panel" style="padding:16px 18px;margin-bottom:18px;">
+            <div class="filters-bar" id="reminderFilters"></div>
+          </div>
+
+          <div id="reminderListWrap"></div>
+        </section>
+
+        <!-- ============ STRIKE FINDER VIEW ============ -->
+        <section class="view" id="view-strikes">
+          <div class="view-header">
+            <div>
+              <h1>Strike Finder</h1>
+              <div class="subtitle">Rule-based Nifty option strike-pair calculator from your 3 manual morning inputs — no live pricing, no broker API.</div>
+            </div>
+            <div class="view-header-actions">
+              <button class="btn btn-ghost" id="strikeSampleBtn">Load Sample Data</button>
+              <button class="btn btn-ghost" id="strikeResetBtn">Reset</button>
+            </div>
+          </div>
+
+          <div class="hint-banner">
+            <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" stroke="#14b8a6" stroke-width="1.8"/><path d="M12 16v-5" stroke="#ff6b5b" stroke-width="1.8"/><path d="M12 8h.01" stroke="#ff6b5b" stroke-width="2.4"/></svg>
+            <div>
+              <b>How this works:</b> This is a fast rule-based calculator, not a live option-chain price fetcher. It never contacts NSE or your broker. The 9:07 open is rounded to the nearest 100 for the ATM reference. The first 5-min High is rounded <b>down</b> (descending) to the nearest 100, then reduced by 100 for your first CALL anchor. The first 5-min Low is rounded <b>up</b> (ascending) to the nearest 100, then increased by 100 for your first PUT anchor. Each subsequent row widens the CALL by +100 and the PUT by -100, for 6 rows total.
+            </div>
+          </div>
+
+          <div class="two-col section-block">
+            <div class="glass-panel hover-tilt">
+              <div class="panel-title"><h3><span class="panel-icon" data-icon="calc"></span>Morning Inputs</h3></div>
+              <div class="panel-body">
+                <form id="strikeInputForm">
+                  <div class="form-grid">
+                    <div class="field">
+                      <label>Index</label>
+                      <select name="index" id="strikeIndexSelect">
+                        <option value="NIFTY50">Nifty 50</option>
+                        <option value="BANKNIFTY">Bank Nifty</option>
+                        <option value="SENSEX">Sensex</option>
+                      </select>
+                    </div>
+                    <div class="field"><label>9:07 Open Price</label><input type="number" step="any" name="open907" id="strikeOpen907" placeholder="e.g. 23445.54" required/></div>
+                    <div class="field"><label>First 5-min High</label><input type="number" step="any" name="high5" id="strikeHigh5" placeholder="e.g. 23440" required/></div>
+                    <div class="field"><label>First 5-min Low</label><input type="number" step="any" name="low5" id="strikeLow5" placeholder="e.g. 23222" required/></div>
+                  </div>
+                  <div id="strikeFormMsg" style="margin-top:10px;"></div>
+                  <div class="modal-actions" style="margin-top:16px;justify-content:flex-start;">
+                    <button type="button" class="btn btn-primary" id="strikeGenerateBtn">Generate Pairs</button>
+                    <button type="button" class="btn btn-ghost" id="strikeSaveSessionBtn">Save Session</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="glass-panel">
+              <div class="panel-title"><h3><span class="panel-icon" data-icon="gauge"></span>Summary</h3></div>
+              <div class="panel-body">
+                <div class="grid-2" id="strikeSummaryCards" style="grid-template-columns:1fr 1fr;gap:12px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-panel section-block">
+            <div class="panel-title">
+              <h3><span class="panel-icon" data-icon="ladder"></span>Generated Strike Pairs</h3>
+              <span class="link-btn" id="strikeExportCsvBtn">Export CSV →</span>
+            </div>
+            <div class="panel-body">
+              <div class="table-wrap" id="strikePairsTableWrap"></div>
+            </div>
+          </div>
+
+          <div class="glass-panel section-block">
+            <div class="panel-title">
+              <h3><span class="panel-icon" data-icon="edit"></span>Manual LTP Helper</h3>
+              <span class="link-btn" id="strikeLtpClearBtn">Clear LTPs</span>
+            </div>
+            <div class="panel-body">
+              <div class="hint-banner" style="margin-bottom:14px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" stroke="#14b8a6" stroke-width="1.8"/><path d="M12 16v-5" stroke="#ff6b5b" stroke-width="1.8"/><path d="M12 8h.01" stroke="#ff6b5b" stroke-width="2.4"/></svg>
+                <div>
+                  Type the CALL and PUT last-traded prices from your broker terminal for each row below. The page computes combined premium, per-leg mid, and totals/averages locally — entirely optional, and never fetched automatically.
+                </div>
+              </div>
+              <div class="table-wrap" id="strikeLtpTableWrap"></div>
+              <div class="grid-4" id="strikeLtpStats" style="margin-top:16px;"></div>
+            </div>
+          </div>
+
+          <div class="glass-panel section-block">
+            <div class="panel-title"><h3><span class="panel-icon" data-icon="history"></span>Saved Sessions</h3></div>
+            <div class="panel-body" id="strikeHistoryWrap"></div>
+          </div>
+        </section>
+      </main>
+
+      <div class="footer-note">Aureum Journal — Conceptual trading journal build. Data is stored locally in your browser ([DATABASE_TECHNOLOGY] placeholder).</div>
+    </div>
+  </div>
+</div>
+
+<script>
+/*__APP_JS__*/
+</script>
+<script>
+  // wire up small nav-link buttons scattered in panels (data-nav)
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest('[data-nav]');
+    if (el) document.dispatchEvent(new CustomEvent('app:navigate', { detail: { view: el.dataset.nav } }));
+  });
+  Utils.id('#reminderNavBtn') && Utils.id('#reminderNavBtn').addEventListener('click', () => {
+    document.dispatchEvent(new CustomEvent('app:navigate', { detail: { view: 'reminders' } }));
+  });
+</script>
+<script>
+  // Landing <-> App shell routing (kept as a tiny inline script so it runs
+  // even in the extremely unlikely case the main bundle fails to init —
+  // worst case, "Enter the Journal" still reveals the app shell).
+  (function () {
+    function enterApp() {
+      var landing = document.getElementById('landingPage');
+      var shell = document.getElementById('appShell');
+      if (landing) landing.classList.add('hidden');
+      if (shell) shell.classList.remove('hidden');
+      try { Store.updateSettings({ visitedApp: true }); } catch (e) {}
+      window.scrollTo(0, 0);
+      document.dispatchEvent(new CustomEvent('app:entered-shell'));
+    }
+    function backToLanding() {
+      var landing = document.getElementById('landingPage');
+      var shell = document.getElementById('appShell');
+      if (shell) shell.classList.add('hidden');
+      if (landing) landing.classList.remove('hidden');
+      window.scrollTo(0, 0);
+      document.dispatchEvent(new CustomEvent('app:back-to-landing'));
+    }
+    ['landingEnterBtn','landingEnterBtn2','landingEnterBtn3','landingEnterBtn4'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('click', enterApp);
+    });
+    var seeFeatures = document.getElementById('landingSeeFeaturesBtn');
+    if (seeFeatures) seeFeatures.addEventListener('click', function () {
+      var el = document.getElementById('landingFeatures');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    });
+    var backBtn = document.getElementById('backToLandingBtn');
+    if (backBtn) backBtn.addEventListener('click', backToLanding);
+
+    // Brand mark image is wired from app.js once the main bundle is ready
+    // (see App.initLanding()).
+  })();
+</script>
+</body>
+</html>
