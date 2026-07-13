@@ -1,8 +1,7 @@
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, push, set, onValue } from "firebase/database";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getDatabase, ref, push, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 const firebaseConfig = {
-  // Replace these placeholders with your actual config from the Firebase Console!
   apiKey: "AIzaSyDlDYO0b2xSQeJ1r6iV7pFX6KSInQgkfM4",
   authDomain: "trading-journal-4a6af.firebaseapp.com",
   databaseURL: "https://trading-journal-4a6af-default-rtdb.asia-southeast1.firebasedatabase.app",
