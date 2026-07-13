@@ -1,7 +1,8 @@
 import re
+import os
 
-SRC = "/home/user/site/src"
-OUT = "/home/user/site/index.html"
+SRC = os.path.abspath(os.path.join(os.path.dirname(__file__), "src"))
+OUT = os.path.abspath(os.path.join(os.path.dirname(__file__), "index.html"))
 
 def read(path):
     with open(path, 'r', encoding='utf-8') as f:
