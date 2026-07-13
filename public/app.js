@@ -13,18 +13,23 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
+console.log("DEBUG: 1. Firebase Initialized Successfully!"); // <-- ADD THIS
+
 const tradeForm = document.getElementById('tradeForm');
 const tradesList = document.getElementById('tradesList');
 
-// 1. Save trade when form is submitted
 tradeForm.addEventListener('submit', (e) => {
   e.preventDefault();
+  console.log("DEBUG: 2. 'Log Trade' Button Clicked!"); // <-- ADD THIS
   
   const pair = document.getElementById('pair').value;
   const type = document.getElementById('type').value;
   const price = document.getElementById('price').value;
 
   const newTradeRef = push(ref(database, "trades"));
+  
+  console.log("DEBUG: 3. Writing data to path:", newTradeRef.key); // <-- ADD THIS
+  
   set(newTradeRef, {
     pair: pair,
     type: type,
@@ -32,10 +37,10 @@ tradeForm.addEventListener('submit', (e) => {
     timestamp: Date.now()
   });
 
-  tradeForm.reset(); // Clear the form fields
+  tradeForm.reset(); 
 });
 
-// 2. Automatically load and display trades in real-time
+// (Keep your onValue listener the same below)
 onValue(ref(database, "trades"), (snapshot) => {
   tradesList.innerHTML = ''; 
   const trades = snapshot.val();
