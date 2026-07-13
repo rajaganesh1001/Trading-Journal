@@ -3,12 +3,12 @@ import { getDatabase, ref, push, set, onValue } from "firebase/database";
 
 const firebaseConfig = {
   // Replace these placeholders with your actual config from the Firebase Console!
-  apiKey: "YOUR_API_KEY",
+  apiKey: "AIzaSyDlDYO0b2xSQeJ1r6iV7pFX6KSInQgkfM4",
   authDomain: "trading-journal-4a6af.firebaseapp.com",
   databaseURL: "https://trading-journal-4a6af-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "trading-journal-4a6af",
   storageBucket: "trading-journal-4a6af.appspot.com",
-  appId: "YOUR_APP_ID"
+  appId: "1:172027776482:web:d9a1bf68733332f195bdbb"
 };
 
 const app = initializeApp(firebaseConfig);
