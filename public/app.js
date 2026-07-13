@@ -13,14 +13,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-console.log("DEBUG: 1. Firebase Initialized Successfully!"); // <-- ADD THIS
+//console.log("DEBUG: 1. Firebase Initialized Successfully!"); // <-- ADD THIS
 
 const tradeForm = document.getElementById('tradeForm');
 const tradesList = document.getElementById('tradesList');
 
 tradeForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  console.log("DEBUG: 2. 'Log Trade' Button Clicked!"); // <-- ADD THIS
+  //console.log("DEBUG: 2. 'Log Trade' Button Clicked!"); // <-- ADD THIS
   
   const pair = document.getElementById('pair').value;
   const type = document.getElementById('type').value;
@@ -28,7 +28,7 @@ tradeForm.addEventListener('submit', (e) => {
 
   const newTradeRef = push(ref(database, "trades"));
   
-  console.log("DEBUG: 3. Writing data to path:", newTradeRef.key); // <-- ADD THIS
+  //console.log("DEBUG: 3. Writing data to path:", newTradeRef.key); // <-- ADD THIS
   
   set(newTradeRef, {
     pair: pair,
