@@ -440,11 +440,22 @@ canvas.ipc-spark{ width:100%; height:44px; display:block; }
 .idx-chip.GENERAL .dot{ background:var(--accent-secondary); }
 
 .pill{ display:inline-block; padding:3.5px 11px; border-radius:var(--radius-pill); font-size:11px; font-weight:700; background:var(--bg-canvas-2); color:var(--text-2); }
-.pill.open{ background:rgba(59,130,246,0.12); color:var(--blue); }
-.pill.closed{ background:var(--bg-canvas-2); color:var(--text-3); }
+/* Open = amber/gold (still live, needs attention) · Closed = neutral grey-green (settled, done) —
+   deliberately distinct from the CE/PE red/green pair below so option-type and trade-status
+   badges never look like they're encoding the same thing. */
+.pill.open{ background:rgba(240,180,41,0.16); color:var(--gold-deep); }
+.pill.closed{ background:rgba(31,179,122,0.10); color:var(--green); }
 .pill.high{ background:rgba(239,68,68,0.10); color:var(--red); }
 .pill.medium{ background:rgba(240,180,41,0.14); color:var(--gold-deep); }
 .pill.low{ background:rgba(31,179,122,0.10); color:var(--green); }
+
+/* Option Type badge (CE = Call = green shade, PE = Put = red shade) — a
+   dedicated color pairing (distinct from the pos/neg P&L colors used
+   elsewhere) so a trade's option type is instantly scannable in any
+   table/list without reading the text. */
+.opt-type-pill{ display:inline-flex; align-items:center; gap:5px; padding:3.5px 10px; border-radius:var(--radius-pill); font-size:11px; font-weight:800; letter-spacing:.02em; white-space:nowrap; }
+.opt-type-pill.CE{ background:rgba(31,179,122,0.12); color:var(--green); }
+.opt-type-pill.PE{ background:rgba(239,68,68,0.10); color:var(--red); }
 
 /* list rows (recent trades / reminders) */
 .row-list{ display:flex; flex-direction:column; }

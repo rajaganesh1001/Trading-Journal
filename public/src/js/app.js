@@ -17,6 +17,11 @@ const QUICK_NOTES = [
   'Time for Exit'
 ];
 
+// Default brokerage/charges (₹) pre-filled on every new trade entry so
+// the user doesn't have to type it each time — still fully editable per
+// trade for the rare case a real fill had different charges.
+const DEFAULT_BROKERAGE = 55;
+
 const App = (() => {
   let currentView = 'dashboard';
   let vaultState = { search: '', index: 'ALL', strategy: 'ALL', status: 'ALL', sortKey: 'entryDate', sortDir: 'desc', selected: new Set() };
@@ -394,7 +399,7 @@ const App = (() => {
       <div class="row-item" data-id="${t.id}">
         <div class="row-main">
           <div class="rt-title"><span class="idx-chip ${t.index}"><span class="dot"></span>${meta.short}</span> &nbsp;${Utils.escapeHtml(t.strategy || 'Untagged')}</div>
-          <div class="rt-sub">${Utils.formatDateShort(t.entryDate)} · ${t.optType} ${t.side} · Qty ${t.qty}</div>
+          <div class="rt-sub">${Utils.formatDateShort(t.entryDate)} · ${optTypePillHtml(t.optType)} ${t.side} · Qty ${t.qty}</div>
         </div>
         ${pnlDisplay}
         <div class="row-actions">
@@ -426,6 +431,14 @@ const App = (() => {
 
   function emptyStateHtml(msg, icon) {
     return `<div class="empty-state">${icon}<div>${msg}</div></div>`;
+  }
+
+  // Colored CALL/PUT badge — CE (Call) renders in a green shade, PE (Put)
+  // in a red shade, so option type is instantly scannable in any table or
+  // list without reading the text itself.
+  function optTypePillHtml(optType) {
+    const label = optType === 'PE' ? 'PE' : 'CE';
+    return `<span class="opt-type-pill ${label}">${label}</span>`;
   }
 
   function bindRowActions(containerSel) {
@@ -614,7 +627,7 @@ const App = (() => {
         <td class="checkbox-cell"><input type="checkbox" class="row-select" data-id="${t.id}" ${vaultState.selected.has(t.id)?'checked':''}/></td>
         <td><span class="idx-chip ${t.index}"><span class="dot"></span>${meta.short}</span></td>
         <td>${Utils.escapeHtml(t.strategy || '—')}</td>
-        <td>${t.optType} · ${t.side}</td>
+        <td>${optTypePillHtml(t.optType)} · ${t.side}</td>
         <td>${Utils.formatDateShort(t.entryDate)} ${t.entryTime||''}<br><span style="color:var(--text-3);font-size:11px;">@ ${t.entryPrice}</span></td>
         <td>${t.exitDate ? Utils.formatDateShort(t.exitDate) + ' ' + (t.exitTime||'') : '—'}${t.exitPrice!=null?`<br><span style="color:var(--text-3);font-size:11px;">@ ${t.exitPrice}</span>`:''}</td>
         <td>${t.qty}${t.lots ? `<br><span style="color:var(--text-3);font-size:11px;">${t.lots} lot${t.lots===1?'':'s'} × ${t.lotSize}</span>` : ''}</td>
@@ -724,7 +737,7 @@ const App = (() => {
             </div>
           </div>
           <div class="form-grid">
-            <div class="field"><label>Charges / Brokerage</label><input type="number" name="charges" value="${trade?.charges ?? 0}" step="any"/></div>
+            <div class="field"><label>Charges / Brokerage</label><input type="number" name="charges" value="${trade?.charges ?? DEFAULT_BROKERAGE}" step="any"/></div>
             <div class="field">
               <label>Status</label>
               <select name="status">
@@ -1103,7 +1116,7 @@ const App = (() => {
         ${dateCell}
         <td><span class="idx-chip ${t.index}"><span class="dot"></span>${meta.short}</span></td>
         <td>${Utils.escapeHtml(t.strategy || '—')}</td>
-        <td>${t.optType} · ${t.side}${t.strike ? ' · ' + t.strike : ''}</td>
+        <td>${optTypePillHtml(t.optType)} · ${t.side}${t.strike ? ' · ' + t.strike : ''}</td>
         <td>${t.entryTime || '—'}<br><span style="color:var(--text-3);font-size:11px;">@ ${t.entryPrice}</span></td>
         <td>${t.exitTime ? t.exitTime : '—'}${t.exitPrice!=null?`<br><span style="color:var(--text-3);font-size:11px;">@ ${t.exitPrice}</span>`:''}</td>
         <td>${t.qty}</td>

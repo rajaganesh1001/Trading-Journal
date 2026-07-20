@@ -27,24 +27,17 @@ const Charts = (() => {
   }
 
   function setupCanvas(canvas) {
-    if (!canvas || typeof canvas.getBoundingClientRect !== 'function') {
-      return { ctx: null, w: 0, h: 0 };
-    }
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
     canvas.width = Math.max(1, rect.width * dpr);
     canvas.height = Math.max(1, rect.height * dpr);
-    const ctx = canvas.getContext && canvas.getContext('2d');
-    if (!ctx) {
-      return { ctx: null, w: rect.width, h: rect.height };
-    }
+    const ctx = canvas.getContext('2d');
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     return { ctx, w: rect.width, h: rect.height };
   }
 
   function lineChart(canvas, points, opts = {}) {
     const { ctx, w, h } = setupCanvas(canvas);
-    if (!ctx) return;
     const pal = palette();
     ctx.clearRect(0, 0, w, h);
     const pad = { l: 54, r: 16, t: 16, b: 28 };
@@ -132,7 +125,6 @@ const Charts = (() => {
 
   function barChart(canvas, items, opts = {}) {
     const { ctx, w, h } = setupCanvas(canvas);
-    if (!ctx) return;
     const pal = palette();
     ctx.clearRect(0, 0, w, h);
     const pad = { l: 54, r: 16, t: 16, b: 34 };
@@ -204,7 +196,6 @@ const Charts = (() => {
 
   function donutChart(canvas, items, opts = {}) {
     const { ctx, w, h } = setupCanvas(canvas);
-    if (!ctx) return;
     const pal = palette();
     ctx.clearRect(0, 0, w, h);
     const cx = w / 2, cy = h / 2;
@@ -234,7 +225,6 @@ const Charts = (() => {
   // an at-a-glance trend without needing to read numbers off an axis.
   function sparkline(canvas, values, opts = {}) {
     const { ctx, w, h } = setupCanvas(canvas);
-    if (!ctx) return;
     const pal = palette();
     ctx.clearRect(0, 0, w, h);
     const pad = 3;
@@ -297,7 +287,6 @@ const Charts = (() => {
   // widgets where discrete bars read better than a continuous line).
   function barSparkline(canvas, values, opts = {}) {
     const { ctx, w, h } = setupCanvas(canvas);
-    if (!ctx) return;
     const pal = palette();
     ctx.clearRect(0, 0, w, h);
     if (!values || !values.length) return;

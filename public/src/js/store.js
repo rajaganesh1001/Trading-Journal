@@ -7,22 +7,8 @@
 const Store = (() => {
   const LS_KEY = 'ttj_v1_data';
   const SCHEMA_VERSION = 1;
-  const FIREBASE_CONFIG = {
-    apiKey: 'AIzaSyDlDYO0b2xSQeJ1r6iV7pFX6KSInQgkfM4',
-    authDomain: 'trading-journal-4a6af.firebaseapp.com',
-    databaseURL: 'https://trading-journal-4a6af-default-rtdb.asia-southeast1.firebasedatabase.app',
-    projectId: 'trading-journal-4a6af',
-    storageBucket: 'trading-journal-4a6af.appspot.com',
-    appId: '1:172027776482:web:d9a1bf68733332f195bdbb'
-  };
 
   let data = null;
-  let firebaseDb = null;
-  let firebaseReady = false;
-  let firebaseInitAttempted = false;
-  let firebaseSyncing = false;
-  let firebaseSyncPending = false;
-  let firebaseApplyingRemote = false;
 
   // Some sandboxed preview environments (opaque-origin iframes) throw a
   // SecurityError just from *touching* window.localStorage. We probe once
@@ -105,82 +91,12 @@ const Store = (() => {
     persist();
   }
 
-  function normalizeStoredData(source) {
-    const base = defaultData();
-    const merged = { ...base, ...(source || {}) };
-    if (!merged.settings) merged.settings = base.settings;
-    else merged.settings = { ...base.settings, ...merged.settings };
-    if (!merged.strategies) merged.strategies = base.strategies;
-    if (!merged.auditLog) merged.auditLog = [];
-    if (!merged.strikeFinder) merged.strikeFinder = base.strikeFinder;
-    if (!Array.isArray(merged.trades)) merged.trades = [];
-    if (!Array.isArray(merged.reminders)) merged.reminders = [];
-    if (Array.isArray(merged.trades)) merged.trades = merged.trades.map(t => normalizeTrade(t));
-    return merged;
-  }
-
-  function syncToFirebase(force = false) {
-    if (!firebaseReady || !firebaseDb || !data) return;
-    if (firebaseApplyingRemote || (!force && firebaseSyncing)) {
-      firebaseSyncPending = true;
-      return;
-    }
-    firebaseSyncing = true;
-    const payload = JSON.parse(JSON.stringify(data));
-    firebaseDb.ref('aureumJournal').set(payload)
-      .then(() => {
-        firebaseSyncing = false;
-        if (firebaseSyncPending) {
-          firebaseSyncPending = false;
-          syncToFirebase(true);
-        }
-      })
-      .catch((e) => {
-        firebaseSyncing = false;
-        console.warn('Firebase sync failed.', e);
-      });
-  }
-
-  function initFirebaseSync() {
-    if (firebaseInitAttempted || typeof window === 'undefined' || !window.firebase || !window.firebase.apps) return;
-    firebaseInitAttempted = true;
-    try {
-      const firebase = window.firebase;
-      if (!firebase.apps.length) {
-        firebase.initializeApp(FIREBASE_CONFIG);
-      }
-      firebaseDb = firebase.database();
-      firebaseReady = true;
-      firebaseDb.ref('aureumJournal').on('value', (snapshot) => {
-        const remote = snapshot.val();
-        if (firebaseApplyingRemote) return;
-        if (remote === null || remote === undefined) {
-          syncToFirebase(true);
-          return;
-        }
-        const normalizedRemote = normalizeStoredData(remote);
-        const localSig = JSON.stringify(data);
-        const remoteSig = JSON.stringify(normalizedRemote);
-        if (localSig !== remoteSig) {
-          firebaseApplyingRemote = true;
-          data = normalizedRemote;
-          persist(true);
-          emit('store:change', { kind: 'firebase:sync' });
-          firebaseApplyingRemote = false;
-        }
-      });
-    } catch (e) {
-      console.warn('Firebase sync unavailable in this browser.', e);
-    }
-  }
-
-  function persist(skipFirebase = false) {
+  function persist() {
     try {
       safeStorage.setItem(LS_KEY, JSON.stringify(data));
     } catch (e) {
       console.warn('Persist skipped (storage unavailable in this environment).', e);
     }
-    if (!skipFirebase) syncToFirebase();
   }
 
   function audit(action, entity, entityId, meta) {
@@ -667,7 +583,6 @@ const Store = (() => {
   }
 
   load();
-  initFirebaseSync();
 
   return {
     listTrades, getTrade, addTrade, updateTrade, duplicateTrade, copyTradeToOtherBook, deleteTrade, bulkDeleteTrades, computePnl,
